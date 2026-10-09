@@ -18,6 +18,15 @@ test("project round trip preserves embedded art and focal point", () => {
   };
   assert.deepEqual(parseProject(JSON.stringify(p)), p);
 });
+test("older projects default to Blu-ray case format", () => {
+  const p = newProject();
+  delete p.case.format;
+  assert.equal(parseProject(JSON.stringify(p)).case.format, "blu-ray");
+  p.case.format = "dvd";
+  assert.equal(parseProject(JSON.stringify(p)).case.format, "dvd");
+  p.case.format = "invalid";
+  assert.throws(() => parseProject(JSON.stringify(p)));
+});
 test("malformed project input cannot replace the current project", () => {
   for (const bad of [
     {},

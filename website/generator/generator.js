@@ -447,7 +447,7 @@ function draw() {
       ? "120 mm disc · 118 mm outer / " +
         (project.media.type === "cd" ? "40" : "23") +
         " mm inner print guide"
-      : `${project.case.spine} case · ${project.case.content==='full-game'?'full game':'game-key media'}`;
+      : `${project.case.format === "dvd" ? "DVD" : "Blu-ray"} case · ${project.case.spine} spine · ${project.case.content==='full-game'?'full game':'game-key media'}`;
   const problems = [
     ...projectChecks(project, images.front || images.fullWrap),
     ...result.issues,

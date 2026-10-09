@@ -6,12 +6,14 @@ This document defines the first generator contract for the existing Figma templa
 
 | Field | Values | Default |
 | --- | --- | --- |
+| `case.format` | `blu-ray`, `dvd` | `blu-ray` |
 | `case.spine` | `14mm`, `17mm` | `14mm` |
 | `case.content` | `full-game`, `key-media` | `full-game` |
 | `media.type` | `blu-ray`, `dvd`, `cd` | `blu-ray` |
 | `media.discCount` | Positive integer | `1` |
 
 The 14 mm case supports one or two discs. The wider case is intended for three discs; its exact manufactured spine width must be confirmed before print dimensions are locked.
+Blu-ray cases use a 128.1 × 159.6 mm cover panel; DVD cases use the standard 129 × 183 mm panel. The generator scales the shared artwork treatment to the selected format and keeps the Blu-ray format as the default for older projects.
 
 ## Required game data
 
@@ -68,6 +70,7 @@ type PrintProject = {
     steamGridDbUrl?: string // User-supplied game/gallery URL; not derived from the GOG ID
   }
   case: {
+    format: "blu-ray" | "dvd"
     spine: "14mm" | "17mm"
     content: "full-game" | "key-media"
   }
