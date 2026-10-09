@@ -57,6 +57,8 @@ type GameTemplateData = {
 
 `AssetRef` should store the source, source ID, embedded uploaded image data, crop focal point, attribution, and an optional `sourcePageUrl`. Main case and disc artwork may store a `scale` from `1` to `2` for crop zoom. The game-logo asset uses `0.4` to `1.6`; its focal point positions the logo on the front panel. Users browse SteamGridDB in a separate tab, download their chosen artwork, then upload and approve it in the generator. External image URLs are not required to reopen a saved project.
 
+Downloaded JSON projects include `case.format` with either `"blu-ray"` or `"dvd"`. When opening an older project where this key is absent, the generator migrates it to `"blu-ray"` and saves the key back into the next downloaded JSON file.
+
 The accepted [hosting and artwork architecture decision](TEMPLATE-GENERATOR-ARCHITECTURE.md) uses GitHub Pages and browser-side processing, without a SteamGridDB API key or backend integration.
 
 ## Project settings

@@ -4,6 +4,7 @@ import {
   newProject,
   parseProject,
   syncLabels,
+  serializeProject,
   projectChecks,
 } from "./model.js";
 import { BACK_CONTENT_LIMITS } from "./template.js";
@@ -26,6 +27,14 @@ test("older projects default to Blu-ray case format", () => {
   assert.equal(parseProject(JSON.stringify(p)).case.format, "dvd");
   p.case.format = "invalid";
   assert.throws(() => parseProject(JSON.stringify(p)));
+});
+test("saved JSON always includes the case format", () => {
+  const project = newProject();
+  delete project.case.format;
+  const saved = JSON.parse(serializeProject(project));
+  assert.equal(saved.case.format, "blu-ray");
+  project.case.format = "dvd";
+  assert.equal(JSON.parse(serializeProject(project)).case.format, "dvd");
 });
 test("malformed project input cannot replace the current project", () => {
   for (const bad of [

@@ -3,6 +3,7 @@ import {
   newProject,
   syncLabels,
   parseProject,
+  serializeProject,
   projectChecks,
 } from "./model.js";
 import {
@@ -365,7 +366,7 @@ $("#open").onchange = async (e) => {
 };
 $("#save").onclick = () => {
   const url = URL.createObjectURL(
-      new Blob([JSON.stringify(project, null, 2)], {
+      new Blob([serializeProject(project)], {
         type: "application/json",
       }),
     ),

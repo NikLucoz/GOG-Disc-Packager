@@ -11,6 +11,18 @@ export const FEATURES = [
   "controller",
   "offline-installer",
 ];
+export const serializeProject = (project) =>
+  JSON.stringify(
+    {
+      ...project,
+      case: {
+        ...project.case,
+        format: project.case?.format ?? "blu-ray",
+      },
+    },
+    null,
+    2,
+  );
 export const mediaName = (v) =>
   ({ "blu-ray": "Blu-ray", dvd: "DVD", cd: "CD" })[v];
 export const newProject = () => ({
